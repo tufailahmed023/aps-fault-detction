@@ -4,7 +4,7 @@ import pymongo
 import pandas as pd
 import json
 
-client = pymongo.MongoClient("mongodb+srv://tufailahmed023:tufailahmed023@cluster0.snxtukb.mongodb.net/?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb://localhost:27017")
 #print(client)
 
 #print(pd.read_csv('aps_failure_training_set1.csv'))
