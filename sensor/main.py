@@ -8,3 +8,4 @@ print(data.to_dict())
 
 data_ingestion = DataIngestion(data)
 print(data_ingestion.initiate_data_ingestion())
+

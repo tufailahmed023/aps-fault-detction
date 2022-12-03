@@ -28,7 +28,12 @@ class DataIngestionConfig:
             print(SensorException(e,sys))
 
 
-class DataValidationConfig:...
+class DataValidationConfig:
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        self.data_validation_dir = os.path.join(training_pipeline_config.artifact_dir , "data_validation")
+        self.report_file = os.path.join(self.data_validation_dir,"report.ymal")
+        
+
 class DataTransformationConfig:...
 class ModelTrainerConfig:...
 class ModelEvaluationConfig:...
