@@ -1,5 +1,5 @@
 from sensor.entity import artifact_entity
-from sensor.entity import config_entiy
+from sensor.entity import config_entity
 from sensor.logger import logging
 from sensor.exception import SensorException
 import os ,sys
@@ -8,10 +8,10 @@ import pandas as pd
 from typing import Optional
 import numpy as np 
 from utils import convert_columns_float , write_yaml_file
-
+from sensor.config import TARGET_COLUMN
 class DataValidation:
     def __init__(self,
-                data_validation_config:config_entiy.DataValidationConfig , 
+                data_validation_config:config_entity.DataValidationConfig , 
                 data_ingestion_artifact:artifact_entity.DataIngestionArtifact
                 ):
         try:
@@ -117,7 +117,7 @@ class DataValidation:
             logging.info(f"Drop null values colums from test df")
             test_df = self.drop_missing_values_columns(df=test_df,report_key_name="missing_values_within_test_dataset")
             
-            exclude_columns = ["class"]
+            exclude_columns = TARGET_COLUMN 
             base_df = convert_columns_float(df=base_df, exclude_columns=exclude_columns)
             train_df =convert_columns_float(df=train_df, exclude_columns=exclude_columns)
             test_df = convert_columns_float(df=test_df, exclude_columns=exclude_columns)

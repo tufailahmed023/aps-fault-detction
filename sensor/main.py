@@ -1,27 +1,36 @@
-from sensor.entity import config_entiy
+from sensor.entity import config_entity
 from sensor.components.data_ingestion import DataIngestion
 from sensor.components.data_validation import DataValidation
 from sensor.entity.artifact_entity import DataIngestionArtifact
+from sensor.components.data_transformation import DataTransformation
+train = config_entity.TrainingPipelineConfig()
 
-train = config_entiy.TrainingPipelineConfig()
-
-data = config_entiy.DataIngestionConfig(train)
+data = config_entity.DataIngestionConfig(train)
 
 print(data.to_dict())
-print(" Insitation of Dataingestion"*20)
+print("start of dataingestion"*10)
 data_ingestion = DataIngestion(data)
-data_ingestion.initiate_data_ingestion()
-print(" end of Dataingestion"*20)
+data_ingestion_artifact = data_ingestion.initiate_data_ingestion()
 
-print("======================"*20)
+print("=="*20)
+print("=="*20)
+print("=="*20)
 
+print("start of datavlidation"*10)
 
-print("start of datavlidation"*20)
+data1 = config_entity.DataValidationConfig(train)
+obj = DataValidation(data1, data_ingestion_artifact = data_ingestion_artifact)
+data_validation_artifact = obj.initiate_data_validation()
 
-data1 = config_entiy.DataValidationConfig(train)
-obj = DataValidation(data1,DataIngestionArtifact(data.feature_store_file_path,data.train_file_path,data.test_file_path))
+print("=="*20)
+print("=="*20)
+print("=="*20)
 
-obj.initiate_data_validation()
+print("start of datatransformation"*10)
+
+data2 = config_entity.DataTransformationConfig(train)
+obj_tran =  DataTransformation(data2, data_ingestion_artifact = data_ingestion_artifact)
+data_tansformation_artifact = obj_tran.initiate_data_transformation()
 
 
 # import os

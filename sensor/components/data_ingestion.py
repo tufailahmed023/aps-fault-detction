@@ -1,5 +1,5 @@
 from sensor import utils
-from sensor.entity import config_entiy
+from sensor.entity import config_entity
 from sensor.entity import artifact_entity
 from sensor.exception import SensorException
 from sensor.logger import logging
@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 
 class DataIngestion:
     
-    def __init__(self,data_ingestion_config:config_entiy.DataIngestionConfig ):
+    def __init__(self,data_ingestion_config:config_entity.DataIngestionConfig ):
         try:
             logging.info(f"{'>>'*20} Data ingestion {'>>'*20} ")
 
