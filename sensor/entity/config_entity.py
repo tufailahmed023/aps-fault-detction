@@ -2,6 +2,7 @@ import os,sys
 from sensor.exception import SensorException
 from sensor.logger import logging
 from datetime import datetime
+from sensor.entity import config_entity, artifact_entity
 
 FILE_NAME = "sensor.csv"
 TRAIN_FILE_NAME = "train.csv"
@@ -55,5 +56,15 @@ class ModelTrainerConfig:
             self.expected_score = 0.7
             self.overfitting_threshold = 0.1
 
-class ModelEvaluationConfig:...
-class ModelPusherConfig:...
+class ModelEvaluationConfig:
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        self.change_threshold = 0.01
+        
+class ModelPusherConfig:
+        def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+            self.model_pusher_dir = os.path.join(training_pipeline_config.artifact_dir , "model_pusher") #make a folder name called model_pusher
+            self.saved_model_dir = os.path.join("saved_models") # create a folder called saved_model
+            self.pusher_model_dir = os.path.join(self.model_pusher_dir,"saved_models") #inside model_pusher create a dir called saved_model
+            self.pusher_model_path = os.path.join(self.pusher_model_dir,MODEL_FILE_NAME) #push the model.pkl file inside it
+            self.pusher_transformer_path = os.path.join(self.pusher_model_dir,TRANSFORMER_OBJECT_FILE_NAME) #push the transformer.pkl file inside it  
+            self.pusher_target_encoder_path = os.path.join(self.pusher_model_dir,TARGET_ENCODER_OBJECT_FILE_NAME) #push the encorder.pkl file inside it
