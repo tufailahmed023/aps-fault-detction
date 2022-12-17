@@ -3,8 +3,8 @@
 import pymongo
 import pandas as pd
 import json
-
-client = pymongo.MongoClient("mongodb://localhost:27017")
+from sensor.config import mongo_client
+client = mongo_client
 #print(client)
 
 #print(pd.read_csv('aps_failure_training_set1.csv'))
